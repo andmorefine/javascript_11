@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>フォームを利用した通信</title>
+    <script>
+        // formをsubmitした結果ページから呼び出される関数
+        function onComplete() {
+            alert('complete');
+        }
+    </script>
+</head>
+<body>
+    <div>フォームを利用した通信</div>
+    <form target="result" action="register.html">
+        <input type="text">
+        <input type="submit" value="post">
+    </form>
+    <iframe name="result" style="width: 0;height: 0;border: none;"></iframe>
+</body>
+</html>

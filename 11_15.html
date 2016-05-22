@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>JSONによるレスポンス</title>
+</head>
+<body>
+    <div>JSONによるレスポンス</div>
+    <div id="foo"></div>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                var json = JSON.parse(xhr.responseText);
+                console.log(json);
+                alert(json.value); // => foo
+            }
+        }
+        xhr.open('GET', 'http://dev.andmorefine.com/javascript_11/foo.json');
+        xhr.setRequestHeader('If-Modified-Since', 'Thu, 01 Jun 1970 00:00:00 GMT');
+        xhr.send(null);
+
+    </script>
+</body>
+</html>

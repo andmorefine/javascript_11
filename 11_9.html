@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>クロスブラウザXMLHttpRequest</title>
+</head>
+<body>
+    <div id="foo" style="position:absolute;">IE6での実装例</div>
+    <script>
+        if (!window.XMLHttpRequest) { // Internet Explorer 6
+            XMLHttpRequest = function () {
+                var objs = ['MSXML2.XMLHTTP.6.0', 'MSXML2.XMLHTTP.3.0', 'MSXML2.XMLHTTP', 'Microsoft.XMLHTTP'];
+                for (var i = 0; i < objs.length; i++) {
+                    var obj = objs[i];
+                    try {
+                        return new ActiveXobject(obj);
+                    } catch (ignore){
+                    }
+                }
+                throw new Error('Cannot create XMLHttpRequest object.');
+            }
+        }
+        var xhr = new XMLHttpRequest();
+        console.log(xhr);
+    </script>
+</body>
+</html>

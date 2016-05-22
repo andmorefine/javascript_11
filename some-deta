@@ -1,0 +1,8 @@
+
+callback({
+	"foo": "This is foo",
+	"bar": "This is bar",
+	"baz": "This is baz"
+});
+
+

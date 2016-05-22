@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>クリックした位置に要素を表示する例</title>
+</head>
+<body>
+    <div id="foo" style="width:100%;height:800px;position:relative;">
+        <div id="message" style="position:absolute;right:0px;background:lightgray;width:100px;">Hello, World!</div>
+        <p>X座標: <span id="posX"></span></p>
+        <p>Y座標: <span id="posY"></span></p>
+    </div>
+    <script>
+        var foo = document.getElementById('foo');
+        var posX = document.getElementById('posX');
+        var posY = document.getElementById('posY');
+        function getPosition(event) {
+            var x = event.clientX; // ウィンドウ座標系でのマウスポインタのx座標
+            var y = event.clientY; // ウィンドウ座標系でのマウスポインタのx座標
+            var r = event.target.getBoundingClientRect(); // ウィンドウ座標系でのクリックした要素の領域情報
+            x -= r.left; // クリックした要素内でのマウスポインタのx座標
+            y -= r.top; // クリックした要素内でのマウスポインタのy座標
+            return { x: x, y: y };
+        }
+        foo.addEventListener('click', function (event) {
+            var message = document.getElementById('message');
+            if (event.target === message) { // message自体がクリックされたときはなにもしない
+                return;
+            }
+            var pos = getPosition(event);
+            message.style.left = pos.x + 'px';
+            message.style.top = pos.y + 'px';
+            posX.textContent = pos.x;
+            posY.textContent = pos.y;
+        }, false);
+    </script>
+</body>
+</html>

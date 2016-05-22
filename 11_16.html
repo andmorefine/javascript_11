@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>JSONPの利用例</title>
+</head>
+<body>
+    <div>JSONPの利用例</div>
+    <script>
+        function foo(json) {
+            console.log('elem');
+        }
+        function loadDate() {
+            var elem = document.createElement('script');
+            // callback関数としてfooを指定する
+            // JSONPを利用したAPIではcallback関数の名前を指定できることが多い
+            elem.src = 'http://dev.andmorefine.com/javascript_11/some-deta&callback=foo';
+            // scriptタグをheadに追加する
+            // このときDOMが再構築され、scriptタグのsrcの内容がロードされる
+            // ロードされるとfoo関数が実行される
+            document.getElementsByTagName('head')[0].appendChild(elem);
+        }
+        //loadDate();
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>タイムアウト処理</title>
+</head>
+<body>
+    <div>タイムアウト処理</div>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var timerId = window.setTimeout(function () {
+            xhr.abort();
+            console.log('5秒でタイムアウト');
+        }, 5000); // 5秒でタイムアウトさせる
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                // タイムアウト処理をキャンセルする
+                window.clearTimeout(timerId);
+                console.log('タイムアウト処理をキャンセル');
+            }
+        }
+
+        xhr.open('GET', 'http://dev.andmorefine.com/');
+        xhr.setRequestHeader('If-Modified-Since', 'Thu, 01 Jun 1970 00:00:00 GMT');
+        xhr.send(null);
+
+    </script>
+</body>
+</html>

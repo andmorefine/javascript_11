@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>XMLによるレスポンス</title>
+</head>
+<body>
+    <div>XMLによるレスポンス</div>
+    <div id="foo"></div>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                var xml = xhr.responseXML;
+                var xmlobj = xml.getElementsByTagName('value')[0].firstChild.nodeValue;
+                console.log(xml);
+                alert(xmlobj);
+            }
+        }
+        xhr.open('GET', 'http://dev.andmorefine.com/javascript_11/foo.xml');
+        xhr.setRequestHeader('If-Modified-Since', 'Thu, 01 Jun 1970 00:00:00 GMT');
+        xhr.send(null);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>パーフェクトJavaScript</title>
+    <style>
+        body {width: 100%;}
+        table {border: 1px solid #666;margin: 5px 0;font-size: 85%;}
+        table th,table td {border: 1px solid #666;padding: 2px 5px;}
+        table tr:first-child {background:#666;color: #fff;}
+        a[target='_blank'] { color: red; }
+        .container { width: 90%;margin: 0 auto;font-size: 105%;line-height: 1.5; }
+        .section {border-top: 1px solid #999;}
+        h3 {font-size: 140%;margin: 20px 0;}
+        h4 {font-size: 110%;font-weight: bold;background: #333;color: #fff;padding: 10px;}
+        h5 {font-size: 90%;margin: 20px 10px 10px;padding: 5px 10px;background: #eee;}
+        sup {font-size: 80%;}
+        span {font-size: 70%;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>11章　実践クライアントサイドJavaScript</h3>
+        <div class="section">
+            <h4>11-1 スタイル</h4>
+            <div class="section">
+                <h5>スタイル変更方法</h5>
+                <ul>
+                    <li>classNameプロパティでclass名を変更する<a href="11_1.html" target="_blank"> > </a>
+                        <ul>
+                            <li>スタイル操作でもっとも簡単な方法</li>
+                            <li>指定した要素が隣接要素や子要素を持つ場合、大量の変更が発生してパフォーマンスが落ちる<a href="11_2.html" target="_blank"> > </a></li>
+                            <li>個別にクラス名を設定しておくなど</li>
+                        </ul>
+                    </li>
+                    <li>classListプロパティでclass名を変更する<a href="11_3.html" target="_blank"> > </a>
+                        <ul>
+                            <li>HTML5で追加されたclassListプロパティを使うとより簡単にクラスの変更が可能</li>
+                            <li>this.classList.変更コマンド(クラス名)</li>
+                            <li>classListプロバティで利用可能なメソッド
+                                <table>
+                                    <tr><th>クラス名</th><td>説明</td></tr>
+                                    <tr><th>contains(クラス名)</th><td>指定のオブジェクトのクラスに指定のクラスが含まれているか</td></tr>
+                                    <tr><th>add(クラス名)</th><td>クラス名を追加する</td></tr>
+                                    <tr><th>remove(クラス名)</th><td>クラス名を削除</td></tr>
+                                    <tr><th>toggle(クラス名)</th><td>クラス名を追加したり、削除</td></tr>
+                                </table>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>styleプロパティを変更する<a href="11_4.html" target="_blank"> > </a>
+                        <ul>
+                            <li>DOMのstyleプロパティを直接操作</li>
+                            <li>CSSで!importantが付与されているものを除いて、styleに設定した方が優先される</li>
+                            <li>プロパティ名は、ハイフンを削除して、接続文字を大文字にする</li>
+                            <li>floatはcssFloatプロパティで指定</li>
+                            <li>機能とデザインの分離ができないので、あまり推奨しない</li>
+                        </ul>
+                    </li>
+                    <li>スタイルシートそのものを変更する<a href="11_5.html" target="_blank"> > </a>
+                        <ul>
+                            <li>CSS読み込みのタグにidを設定して起き、該当するidの要素のdisabledプロパティを設定して、CSSを丸ごと有効、無効にする</li>
+                            <li>ページ全体のスタイルを丸ごと切り替えるような場合に利用</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="section">
+                <h5>位置の指定</h5>
+                <ul>
+                    <li>position属性
+                        <ul>
+                            <li>staticは、デフォルト値。自動的にレイアウトが決まる</li>
+                            <li>fixedは、ブラウザウィンドウを基準とした相対位置で配置できる。スクロールの影響は受けない。IE6未対応</li>
+                            <li>absoluteは、その要素を含む要素からの相対位置で配置できる</li>
+                            <li>relativeは、タグに従って配置された後、その位置を基準とした相対位置で配置。absoluteの基準となる要素にrelativeを指定するような使い方をする。absoluteは、static属性の要素は基準にならないので、relativeを利用する</li>
+                        </ul></li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>位置</h5>
+                    <ul>
+                        <li>MouseEventが発火した際のEventオブジェクトにマウスの座標が入っている</li>
+                        <li>スクリーン座標は、screenX,screenYで取得できる。ディスプレイの左上を基準とした座標系</li>
+                        <li>ウィンドウ座標は、clientX,clientYで取得できる。ブラウザの表示領域の左上を基準とした座標系。文章・要素のスクロール量の影響は受けない</li>
+                        <li>ドキュメント座標は、pageX,pageYで取得できる。ドキュメントの左上を基準とした座標系。スクロールの影響を受ける。これは独自実装で、IE8以前では使えない</li>
+                        <li>layerX,layerYあるいはoffsetX,offsetYは、発火した要素内での相対座標を取得できる。Webブラウザの独自実装</li>
+                        <li>Element.getBoundingClientRect()で、ウィンドウ座標系での要素の領域情報を取得できる<a href="11_6.html" target="_blank"> > </a>　<a href="11_7.html" target="_blank"> > </a></li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>アニメーション<a href="11_8.html" target="_blank"> > </a></h5>
+
+                    <ul>
+                        <li>setInterval()で定期的な呼び出しを行い、座標や透過度などの変化をさせる</li>
+                        <li>CSS3でも可能。実装次第だが、通常はCSS3によるアニメの方がパフォーマンスがよい</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="section">
+                <h4>11-2 AJAX</h4>
+                <ul>
+                    <li>2005年にJesse James Garrett氏により命名</li>
+                    <li>技術自体はGoogleのGmailがすでに利用</li>
+                    <li>AJAXによりJavaScriptが再評価された</li>
+                </ul>
+                <p>(補足：ajaxはjQueryを利用すると楽)</p>
+                <div class="section">
+                    <h5>非同期処理の利点</h5>
+                </div>
+                <div class="section">
+                    <h5>XMLHttpRequest</h5>
+                    <ul>
+                        <li>JavaScriptからサーバに対して動的にリクエストを送るにはXMLHttpRequestオブジェクトを利用する</li>
+                        <li>標準化されていないが、IE7以降を含むモダンブラウザには実装されている</li>
+                        <li>IE6での実装例<a href="11_9.html" target="_blank"> > </a></li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>基本的な処理の流れ</h5>
+                    <ul>
+                        <li>XMLHttpRequstオブジェクトの生成<a href="11_10.html" target="_blank"> > </a></li>
+                        <li>readyStateの意味
+                            <table>
+                                <tr><th>readyState</th><td>意味</td></tr>
+                                <tr><th>0</th><td>open()が呼び出される前</td></tr>
+                                <tr><th>1</th><td>send()が呼び出される前</td></tr>
+                                <tr><th>2</th><td>サーバーからレスポンスが返ってくる前</td></tr>
+                                <tr><th>3</th><td>サーバーからのレスポンスを受けている最中</td></tr>
+                                <tr><th>4</th><td>サーバーからのレスポンス受信完了</td></tr>
+                            </table>
+                        </li>
+                        <li>容量的にやり取りはJSON推奨</li>
+                        <li>openで、非同期、同期の指定が可能。第3要素と第4要素にはユーザIDとパスワード</li>
+                        <li>Cookieは自動的に解決</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>同期通信<a href="11_11.html" target="_blank"> > </a></h5>
+                    <ul>
+                        <li>send()で送信したあと、通信が返るまで待つので、そのあとで戻り値を処理すればよい</li>
+                        <li>分かり易いが操作性として難があるので動作確認程度</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>タイムアウト<a href="11_12.html" target="_blank"> > </a></h5>
+                    <ul>
+                        <li>同期通信でレスポンスが返らなかった時にリクエストをキャンセルするための方法</li>
+                        <li>非同期ではずっと待つこともできるが、適切なタイムアウトを設定しておいた方がよい</li>
+                        <li>定期的に通信する場合、通信が終わっていない場合は前の処理をタイムアウトさせて、新しく送ると通信量が減らせる</li>
+                        <li>abort()でリクエストのキャンセル</li>
+                        <li>setTimeout()にabort()を設定して発動しておき、レスポンスが返ってきたらclearTimeout()でタイムアウトをキャンセル</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>レスポンス</h5>
+                    <ul>
+                        <li>responseTextに汎用的なレスポンスが返る。text/plain以外もこのプロパティにデータが返る<a href="11_13.html" target="_blank"> > </a></li>
+                        <li>XMLのレスポンスはresponseXMLプロパティで参照すると、解析結果にアクセスできる<a href="11_14.html" target="_blank"> > </a></li>
+                        <li>JSONを受け取る時は、responseTextをJSON.parse()で変換。IE7以前用にはjson2.jsなどを利用<a href="11_15.html" target="_blank"> > </a></li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>クロスオリジン制限</h5>
+                    <ul>
+                        <li>オリジンとは、プロトコル(http:,https:)、ホスト名、ポート番号で構成される要素</li>
+                        <li>通常、オリジンが同一の場合のみ通信を許可する</li>
+                        <li>サーバ側でリクエストを転送して結果を返させれば越えられる</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>クロスオリジン通信</h5>
+                    <ul>
+                        <li>異なるオリジンに対してリクエストを発行することをクロスオリジン通信という</li>
+                        <ul>
+                            <li>JSONP</li>
+                            <li>iframeハック</li>
+                            <li>window.postMessage</li>
+                            <li>XMLHttpRequest Level2</li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>JSONP<a href="11_16.html" target="_blank"> > </a>???</h5>
+                    <ul>
+                        <li>XMLHttpRequestはクロスオリジン通信できないが、scriptタグはscrプロパティに別ドメインのJavaScriptを指定して読み込める</li>
+                        <li>JavaScriptで動的にscriptタグを生成すれば、別ドメインのデータが読めるが、データを取り出すだけでは利用ができないので、JSONPが考案</li>
+                        <li>JSON with Paddingの略で、PaddingとはJSONデータに関数名を付加する意味</li>
+                        <li>サーバはJSONに関数名を付加したデータを返す。クライアントは受け取ったデータに付加されている関数名があればその関数を実行するという仕組み</li>
+                        <li>JSONPは、scriptタグのデータを処理しているだけなので、POSTでの通信ができない</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>iframeハック</h5>
+                    <ul>
+                        <li>親ページと孫iframeを同じドメインで、子iframeが違うドメイン</li>
+                        <li>親ページから、子ページのドメインのhtmlを指定してiframeを作成。この時、URLにハッシュフラグメントを含める。ハッシュフラグメントにAPI呼び出しに利用したいデータを指定</li>
+                        <li>子ドメイン内に、親孫ドメインのページを指定したiframeを作成。これが孫iframe</li>
+                        <li>孫iframeのURLにもハッシュフラグメントを指定</li>
+                        <li>孫iframeのonloadで、親ページの関数を呼び出し、location.hashの値を引数に渡す</li>
+                        <li>IEでも動作し、JSONPよりも安全。JSONPはサーバに悪意があれば対処できないが、iframeだと自ドメインにある孫iframeを経由しないと親ページを操作できないので、安全性が上がる</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>window.postMessage</h5>
+                    <ul>
+                        <li>HTML5で定義されたwindow.postMessageを使うとクロスオリジン通信が可能</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>XMLHttpRequest Level2</h5>
+                    <ul>
+                        <li>Level2には、機能が追加されている</li>
+                        <li>サーバ側の許可をした上で、Access-Control-Allow-OriginというHTTPヘッダをレスポンスに含めることで、アクセス可能なドメインを指定できる</li>
+                        <li>"*"を値で設定すると、すべてのドメインからのアクセスを許可(限定すべき)</li>
+                        <li>この方法で通信する場合、標準ではCookieは送信されない。Cookieを使うには、withCredentialsプロパティにtrueを入れる</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>クロスオリジン通信のセキュリティ問題</h5>
+                    <ul>
+                        <li>異なるドメインとの通信は基本的にリスクがある</li>
+                        <li>信頼できたサイトが乗っ取られてリスクになることもある</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="section">
+                <h4>11-3 フォーム</h4>
+                <ul>
+                    <li>フォームでは、submitするとページ遷移が発生してしまう。ページの遷移はAJAXには不要</li>
+                    <li>submitを使わなくても、XMLHttpRequestで通信すればよい</li>
+                    <li>フォームを使った方がよい方法を紹介</li>
+                </ul>
+                <div class="section">
+                    <h5>フォーム要素</h5>
+                    <ul>
+                        <li>HTMLFormElementというHTMLElementを継承したインターフェースを持つ
+                            <table>
+                                <tr><th>プロパティ名</th><td>説明</td></tr>
+                                <tr><th>elements</th><td>form内のinput要素一覧</td></tr>
+                                <tr><th>length</th><td>form内のinput要素の数</td></tr>
+                                <tr><th>name</th><td>formの名前。JavaScriptから参照するときに利用する</td></tr>
+                                <tr><th>acceptCharset</th><td>formがサポートする文字セット</td></tr>
+                                <tr><th>action</th><td>formのaction要素</td></tr>
+                                <tr><th>enctype</th><td>formのcontent type</td></tr>
+                                <tr><th>method</th><td>データを送信するときに使用するHTTPメソッド</td></tr>
+                                <tr><th>target</th><td>actionの結果を書き込む対象</td></tr>
+                                <tr><th>submit()</th><td>データを送信する</td></tr>
+                                <tr><th>reset()</th><td>formを初期状態に戻す</td></tr>
+                            </table>
+                        </li>
+                        <li>elementsは、フォーム内のコントロール要素</li>
+                        <li>フォーム要素自体は、document.formsで参照できる<a href="11_23.html" target="_blank"> > </a></li>
+                        <li>いずれも、HTMLで記載されている順に列挙されるが、順番よりname属性を使うべき<a href="11_24.html" target="_blank"> > </a></li>
+                        <li>submit()メソッドで、submitボタンを押した時の処理を実行できる。submitイベントは発火しない。resetも同様</li>
+                        <li>onsubmit()イベントハンドらがfalseを返すとフォームのデータはサーバに送信されない。resetも同様</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>フォームコントロール要素</h5>
+                    <ul>
+                        <li>フォームで入力を受け付ける要素のこと</li>
+                        <li>input要素、select要素、button要素、textarea要素など</li>
+                        <li>フォームコントロール要素が共通してもつプロパティ
+                            <table>
+                                <tr><th>プロバティ</th><td>説明</td></tr>
+                                <tr><th>form</th><td>要素が属するフォーム要素</td></tr>
+                                <tr><th>disabled</th><td>要素を無効とするか</td></tr>
+                                <tr><th>name</th><td>要素の名前</td></tr>
+                                <tr><th>type</th><td>要素のタイプ</td></tr>
+                                <tr><th>value</th><td>要素の値</td></tr>
+                                <tr><th>focus()</th><td>要素にフォーカスを当てる<sup>(※1)</sup></td></tr>
+                                <tr><th>blur()</th><td>要素からフォーカスを外す<sup>(※1)</sup></td></tr>
+                            </table>
+                            <span>※1 button要素には存在しないプロパティ</span>
+                        </li>
+                        <li>disabledプロパティをtrueにすると、入力ができなくなる</li>
+                        <li>focus()メソッドで特定のフォームを選択し、blur()でフォーカスを外す。これらはon～が発火する</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>内容の検証</h5>
+                    <ul>
+                        <li>内容の検証のタイミング</li>
+                        <li>submitボタンが押されたとき</li>
+                        <li>データが入力された直後</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>検証に利用できるイベント</h5>
+                    <ul>
+                        <li>submit…submit()メソッドでは発火しないので、その時は自前で検証を呼ぶ</li>
+                        <li>focus,blur…ユーザの入力対象を明示したり、フォーカスが外れた時に検証したり</li>
+                        <li>change…input要素の値が変更されたタイミング。テキストでは使いづらいので、チェックボックスなどに利用</li>
+                        <li>keydown,keyup,keypress…扱いづらい</li>
+                        <li>input…テキストボックスで1文字入力されるごとに発火。キー操作ではなく、文字の変更があった時に発火。HTML5の仕様なので、IE8以下は未対応</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h5>フォームを使ってページ遷移を発生させない方法</h5>
+                    <ul>
+                        <li>targetプロパティで指定されたフレームやウィンドウに、submitの結果を送る</li>
+                        <li>targetプロパティに設定できる値
+                            <table>
+                                <tr><th>値</th><td>結果を表示する場所</td></tr>
+                                <tr><th>_blank</th><td>新規ウィンドウ</td></tr>
+                                <tr><th>_self</th><td>現在のフレーム（ウィンドウ）</td></tr>
+                                <tr><th>_parent</th><td>親フレーム</td></tr>
+                                <tr><th>_top</th><td>フレーム分割を解除してウィンドウ全体に表示</td></tr>
+                                <tr><th>フレーム名、ウィンドウ名</th><td>指定された任意のフレーム（ウィンドウ）</td></tr>
+                            </table>
+                        </li>
+                        <li>省略された場合は自分自身が属するフレームおよびウィンドウ</li>
+                        <li>ページ遷移を抑制するには、targetに現在のウィンドウや空白ではなく、幅と高さ0のiframeを作成して、それを指定する<a href="11_25.html" target="_blank"> > </a></li>
+                        <li>これで遷移はしない(補足：単純にデフォルトの挙動をキャンセルした方がよさそう)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </body>
+    </html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>リクエストを送信する</title>
+</head>
+<body>
+    <div>リクエストを送信する</div>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    alert(xhr.responseText);
+                }
+            }
+        }
+        xhr.open('GET', 'http://dev.andmorefine.com/');
+        xhr.setRequestHeader('If-Modified-Since', 'Thu, 01 Jun 1970 00:00:00 GMT');
+        xhr.send(null);
+    </script>
+</body>
+</html>

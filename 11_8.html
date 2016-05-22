@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>アニメーション</title>
+</head>
+<body>
+    <div id="foo" style="position:absolute;">This is sample.</div>
+    <script>
+        var elem = document.getElementById('foo');
+        var frame = 0;
+        setInterval( function() {
+            frame += 1;
+            elem.style.left = frame * 5 + 'px';
+        }, 100); // 100ミリ秒ごとに5ピクセルずつ右に移動していく
+    </script>
+</body>
+</html>

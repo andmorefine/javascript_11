@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>汎用的なレスポンス</title>
+</head>
+<body>
+    <div>汎用的なレスポンス</div>
+    <div id="foo"></div>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var dom = document.getElementById('foo');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                dom.innerHTML = xhr.responseText;
+            }
+        }
+        xhr.open('GET', 'http://dev.andmorefine.com/');
+        xhr.setRequestHeader('If-Modified-Since', 'Thu, 01 Jun 1970 00:00:00 GMT');
+        xhr.send(null);
+    </script>
+</body>
+</html>
