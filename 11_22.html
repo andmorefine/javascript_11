@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>XMLHttpRequest Level 2</title>
+    <script>
+        var xhr = new XHMHttpRequest();
+        xhr.open('GET', 'http://other.example.com', true);
+        xhr.withCredentials = true; // Cookieを送るように指定
+
+        xhr.onreadystatechage = function() {
+            alert('test');
+        };
+        xhr.send(null);
+    </script>
+</head>
+<body>
+    <div>XMLHttpRequest Level 2</div>
+</body>
+</html>

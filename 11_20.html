@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>postMessageによるクロスオリジン通信（親ページ）</title>
+    <script>
+        // クロスオリジン通信を行ってデータを取得する関数
+        function getData() {
+            // 子iframeに対してpostMessageする
+            frames[0].postMessage('http://other.example.com/some-data', 'http://other.example.com')
+        }
+        // クロスオリジン通信のcallbackとして実行される関数
+        // 子iframeから投げられるメッセージに対して設定している
+        window.addEventListener('message', function(event) {
+            if (event.origin !== 'http://other.example.com') {
+                return;
+            }
+            // event.dataに結果が格納されている
+            document.getElementById("result").innerHTML = event.data;
+        }, false);
+    </script>
+</head>
+<body>
+    <div>postMessageによるクロスオリジン通信（親ページ）</div>
+    <input type="button" value="other.example.comからデータ取得" onclick="getData();">
+    <div id="result"></div>
+    <!-- 子iframeのURLとしてother.example.comのページを指定する -->
+    <iframe id="child-frame" src="http://other.example.com/api.html" style="display:none;"></iframe>
+</body>
+</html>

@@ -8,7 +8,7 @@
         table {border: 1px solid #666;margin: 5px 0;font-size: 85%;}
         table th,table td {border: 1px solid #666;padding: 2px 5px;}
         table tr:first-child {background:#666;color: #fff;}
-        a[target='_blank'] { color: red; }
+        a[target='_blank'] { display: inline-block;color: white;background: red;padding: 1px 5px 2px;line-height: 1.0;text-decoration: none;vertical-align: text-bottom;border-radius: 4px;margin-left: 5px; }
         .container { width: 90%;margin: 0 auto;font-size: 105%;line-height: 1.5; }
         .section {border-top: 1px solid #999;}
         h3 {font-size: 140%;margin: 20px 0;}
@@ -193,18 +193,31 @@
                 <div class="section">
                     <h5>iframeハック</h5>
                     <ul>
-                        <li>親ページと孫iframeを同じドメインで、子iframeが違うドメイン</li>
-                        <li>親ページから、子ページのドメインのhtmlを指定してiframeを作成。この時、URLにハッシュフラグメントを含める。ハッシュフラグメントにAPI呼び出しに利用したいデータを指定</li>
+                        <li>親ページと孫iframeを同じドメインで、子iframeが違うドメイン
+                            <ul>
+                                <li>親ページ（my.example.com）</li>
+                                <li>子ページ（other.example.com）</li>
+                                <li>孫ページ（my.example.com）</li>
+                            </ul>
+                        </li>
+                        <li>親ページから、子ページのドメインのhtmlを指定してiframeを作成。この時、URLにハッシュフラグメントを含める。ハッシュフラグメントにAPI呼び出しに利用したいデータを指定（APIリクエスト）</li>
                         <li>子ドメイン内に、親孫ドメインのページを指定したiframeを作成。これが孫iframe</li>
                         <li>孫iframeのURLにもハッシュフラグメントを指定</li>
                         <li>孫iframeのonloadで、親ページの関数を呼び出し、location.hashの値を引数に渡す</li>
-                        <li>IEでも動作し、JSONPよりも安全。JSONPはサーバに悪意があれば対処できないが、iframeだと自ドメインにある孫iframeを経由しないと親ページを操作できないので、安全性が上がる</li>
+                        <li>IEでも動作し、JSONPよりも安全。JSONPはサーバに悪意があれば対処できないが、iframeだと自ドメインにある孫iframeを経由しないと親ページを操作できないので、安全性が上がる
+                            <a href="11_17.html" target="_blank"> > </a>
+                            <a href="11_18.html" target="_blank"> > </a>
+                            <a href="11_19.html" target="_blank"> > </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="section">
                     <h5>window.postMessage</h5>
                     <ul>
-                        <li>HTML5で定義されたwindow.postMessageを使うとクロスオリジン通信が可能</li>
+                        <li>HTML5で定義されたwindow.postMessageを使うとクロスオリジン通信が可能
+                            <a href="11_20.html" target="_blank"> > </a>
+                            <a href="11_21.html" target="_blank"> > </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="section">
@@ -213,7 +226,7 @@
                         <li>Level2には、機能が追加されている</li>
                         <li>サーバ側の許可をした上で、Access-Control-Allow-OriginというHTTPヘッダをレスポンスに含めることで、アクセス可能なドメインを指定できる</li>
                         <li>"*"を値で設定すると、すべてのドメインからのアクセスを許可(限定すべき)</li>
-                        <li>この方法で通信する場合、標準ではCookieは送信されない。Cookieを使うには、withCredentialsプロパティにtrueを入れる</li>
+                        <li>この方法で通信する場合、標準ではCookieは送信されない。Cookieを使うには、withCredentialsプロパティにtrueを入れる<a href="11_22.html" target="_blank"> > </a></li>
                     </ul>
                 </div>
                 <div class="section">

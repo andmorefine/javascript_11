@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>iframeを利用したクロスオリジン通信（親ページ）</title>
+    <script>
+        // クロスオリジン通信を行ってデータを取得する関数
+        function getData() {
+            // 子ifameのURLとしてother.examlpe.comのページを指定する
+            // パラメータとして#以降にデータを指定する
+            frames[0].location.href =
+                'http://other.example.com/api.html#' +
+                '{' +
+                    // これが本来実行したいAPI
+                    '"api": "http://other.example.com/some-data",' +
+                    // 子iframeの中で指定してもらう孫iframeのURL
+                    '"callback": "http://my.example.com/callback.html"' +
+                '}';
+        }
+        // クロスオリジン通信のcallbackとして実行される関数
+        // 孫iframeから呼び出される
+        function callback(param) {
+            document.getElementById("result").innerHTML = param;
+            frames[0].frames[0].location.href = 'dummy.gif';
+        }
+    </script>
+</head>
+<body>
+    <div>iframeを利用したクロスオリジン通信（親ページ）</div>
+    <input type="button" value="other.example.comからデータ取得" onclick="getData();">
+    <ifame id="child-frame" src="dummy.gif" style="display:none;"></ifame>
+</body>
+</html>

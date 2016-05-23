@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>postMessageによるクロスオリジン通信（子iframe）</title>
+    <script>
+        window.addEventListener('message', function(event) {
+            if (event.origin !== 'my.example.com') {
+                return;
+            }
+            var xhr = new XHMHttpRequest();
+            xhr.onreadystatechage = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // メッセージとしてresponseTextを返している
+                    event.source.postMessage(xhr.responseText, 'http://my.example.com');
+                }
+            };
+            var url = event.data;
+            xhr.open(url, 'GET');
+            xhr.send(null);
+        }, false);
+    </script>
+</head>
+<body>
+    <div>postMessageによるクロスオリジン通信（子iframe）</div>
+</body>
+</html>

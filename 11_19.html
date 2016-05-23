@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>iframeを利用したクロスオリジン通信（孫ページ）</title>
+    <script>
+        window.load = function() {
+            window.top.callback(location.hash);
+        }
+    </script>
+</head>
+<body>
+    <div>iframeを利用したクロスオリジン通信（孫ページ）</div>
+</body>
+</html>
